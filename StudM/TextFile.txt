@@ -1,0 +1,62 @@
+﻿<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6 ">
+            <h2 class=" text-info"> Student List </h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="StudM" asp-action="AllCourse" class="btn btn-primary">
+                <i class="bi bi-person-plus-fill"></i> &nbsp; Available Course
+            </a>
+
+            <a asp-controller="StudM" asp-action="AddStud" class="btn btn-info">
+                <i class="bi bi-plus-square"></i> &nbsp; Create New Student
+            </a>
+        </div>
+    </div>
+</div>
+<table class="table table-bordered table-striped " style="background-color:lightgray;">
+    <thead>
+        <tr class="text-center">
+            <th>StudentId</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Contact</th>
+            <th>RollNo</th>
+            <th>Address</th>
+            <th>State</th>
+            <th>City</th>
+            <th>ZipCode</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model)
+        {
+            <tr>
+                <td>@obj.StudentId</td>
+                <td>@obj.Name</td>
+                <td>@obj.Email</td>
+                <td>@obj.ContactNo</td>
+                <td>@obj.RollNo</td>
+                <td>@obj.Address</td>
+                <td>@obj.State</td>
+                <td>@obj.City</td>
+                <td>@obj.ZipCode</td>
+
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-controller="Admin" asp-action="Edit" asp-route-id="@obj.StudentId" class="btn btn-info mx-2">
+                            <i class="bi bi-pencil-square"></i>View
+                        </a>
+                        <a asp-controller="StudM" asp-action="AddStud" asp-route-id="@obj.StudentId" class="btn btn-primary mx-2">
+                            <i class="bi bi-pencil-square"></i>Update
+                        </a>
+                        <a asp-controller="StudM" asp-action="DeleteStud" asp-route-id="@obj.StudentId" class="btn btn-danger mx-2">
+                            <i class="bi bi-trash-fill"></i>Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

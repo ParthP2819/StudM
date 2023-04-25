@@ -1,0 +1,28 @@
+﻿@model Stud.Model.Models.course
+
+<form method="post" asp-action="AddCourse">
+    <div class="border p-3 mt-4" style="background-color:lightgray;">
+        <input type="hidden" asp-for="CourseId" value="@ViewBag.Id" />
+        <div class="row pb-2">
+            <h2 class="text-info">Add Course</h2>
+            <hr />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CourseName"></label>
+            <input asp-for="CourseName" class="form-control" />
+            <span asp-validation-for="CourseName"></span>
+        </div>
+
+         <div class="mb-3">
+            <label asp-for="CoursePrice"></label>
+            <input asp-for="CoursePrice" class="form-control" />
+            <span asp-validation-for="CoursePrice" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-info" style="width:150px">Save</button>
+
+        <a class="btn btn-info" asp-controller="StudM" asp-action="Index" style="width:150px">Back To List</a>
+
+    </div>
+</form>
