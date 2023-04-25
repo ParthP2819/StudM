@@ -1,0 +1,59 @@
+1) Create an MVC Project .Net Core 
+
+- Use the database names as Collage.
+- Create a Separate library Call DAL which provide the database integration.
+- You need to create below function 
+
+	+ AddStudent
+	+ UpdateStudent
+	+ DeleteStudent
+	+ AddCourse
+	+ UpdateCourse
+	+ DeleteCourse
+	+ GetAllStudents
+		* Show below fields on list
+			> StudentID
+			> Name
+			> Email
+			> Contact No.
+			> RollNo
+			> Address
+			> State
+			> City
+			> Zipcode
+			> CourseTotalPrice
+
+- Create Student table with the below field
+
+	+ StudentId
+	+ Name
+	+ RollNo 
+	+ Email
+	+ Address
+	+ State
+	+ City
+	+ ZipCode	
+	+ ContactNo
+
+- Create another table called Course
+
+	+ CourseId
+	+ CourseName
+	+ CoursePrice
+
+- Create another table called Admin
+
+	+ AdminId
+	+ AdminName
+	+ AdminEmail
+	+ AdminPassword
+
+- You can add Admin Statically.
+- Only Admin can Add,Update,Delete student.
+- One student can have multiple courses.
+- Use pop-up/Separte Page for Course functionality if possible.
+
+Please Import Excel file functionality and Insert Data in Database.
+
+ 
+********************************  All The Best  ********************************
