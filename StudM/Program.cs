@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Stud.DAL.Data;
+using Stud.DAL.Repository.IRepository;
+using Stud.DAL.Repository;
+using Stud.Model.ForEmail;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,14 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(con_string, ServerVersion.AutoDetect(con_string))
     );
 
+//adding scopped
+builder.Services.AddScoped<IEmailSender, EmailSender>();
+
+//email configuration
+var emailConfig = builder.Configuration
+        .GetSection("EmailConfiguration")
+        .Get<EmailCon>();
+builder.Services.AddSingleton(emailConfig);
 
 var app = builder.Build();
 

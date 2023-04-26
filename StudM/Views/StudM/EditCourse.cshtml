@@ -1,0 +1,36 @@
+﻿@model Stud.Model.Models.course
+
+<form method="post" asp-action="EditCourse">
+    <div class="border p-3 mt-4" style="background-color:lightgray;">
+        <input hidden asp-for="CourseId" />
+        <input hidden asp-for="Sid" />
+        <div class="row pb-2">
+            <h2 class="text-info">Add Course</h2>
+            <hr />
+        </div>
+        <div class="mb-3">
+            <label asp-for="CourseName"> </label>
+            <input asp-for="CourseName" class="form-control" />
+            <span asp-validation-for="CourseName" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="CoursePrice"> </label>
+            <input asp-for="CoursePrice" type="number" required class="form-control" />
+            <span asp-validation-for="CoursePrice" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+        <a asp-controller="StudM" asp-action="Views" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
+
+    </div>
+</form>
+
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+
+}

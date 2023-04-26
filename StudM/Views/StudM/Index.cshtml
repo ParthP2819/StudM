@@ -1,62 +1,94 @@
-﻿@model List<Stud.Model.Models.student>
+﻿@*@model List<Stud.Model.Models.StudVM>
+*@
+
+@model IEnumerable<Stud.Model.Models.StudVM>
 @{
     ViewData["Title"] = "Index";
 }
+@*<form method="post" asp-action="studfile" enctype="multipart/form-data">
+    <table>
+        <tr>
+            <div class="row">
 
-<div class=" row pt-4">
-    <div class="col-6">
-        <h2 class="text-info">Student List </h2>
-    </div>
-    <div class=" col-6 text-end">
-        <div>
-            <a asp-controller="StudM" asp-action="AddStud" class="btn btn-info">
-                <i class="bi bi-person-plus-fill"></i> &nbsp; Add Student
-            </a>
+                <div class="mb-3 col-6">
+
+                    <input type="file" id="uploadBox" name="file" class="form-control" />
+                </div>
+                <div class="mt-4 col-6 text-center ">
+                    <button type="submit" class="btn btn-primary" style="width:150px">Upload</button>
+                </div>
+            </div>
+        </tr>
+
+    </table>
+</form>*@
+<div class="container p-0">
+    <div class=" row pt-4">
+        <div class="col-3 text-center">
+            <h2 class="text-info">Student List </h2>
+        </div>
+        <div class="col-6 text-center">
+            <form method="post" asp-action="studfile" enctype="multipart/form-data">
+                <input type="file" @*id="uploadBox"*@ name="file" class="form-control" />
+                <button type="submit" class="btn btn-primary" style="width:150px">Upload</button>
+            </form>
+        </div>
+
+        <div class=" col-3 text-center">
+            <div>
+                <a asp-controller="StudM" asp-action="AddStud" class="btn btn-info">
+                    <i class="bi bi-person-plus-fill"></i> &nbsp; Add Student
+                </a>
+            </div>
         </div>
     </div>
 </div>
 <br />
-@*<div class="container p-3">*@
-    <table class="table table-bordered table-striped" style="width:100%; background-color:lightgray;">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Contact</th>
-                <th>RollNo</th>
-                <th>Address</th>
-                <th>State</th>
-                <th>City</th>
-                <th>ZipCode</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
+<div class="container p-0 ">
+    <div class="row pt-1">
+        <table class="table table-bordered table-striped" style="width:100%; background-color:lightgray;">
+            <thead>
                 <tr>
-                    <td width="10%">@obj.Name</td>
-                    <td width="5%">@obj.Email</td>
-                    <td width="10%">@obj.ContactNo</td>
-                    <td width="12%">@obj.RollNo</td>
-                    <td width="7%">@obj.Address</td>
-                    <td width="5%">@obj.State</td>
-                    <td width="5%">@obj.City</td>
-                    <td width="7%">@obj.ZipCode</td>
-                    <td width="30%">
-                        <div class="w-75 btn-group" role="group">
-                            <a asp-controller="StudM" asp-action="AddCourse" asp-route-id="@obj.StudentId" 
-                            class="btn btn-primary mx-2"><i class="bi bi-trash-fill"></i> AddCourse</a>
-                            <a asp-controller="StudM" asp-action="Views" asp-route-id="@obj.StudentId"
-                           class="btn btn-info mx-2"> <i class="bi bi-pencil-square"></i> View </a>
-                            <a asp-controller="StudM" asp-action="AddStud" asp-route-id="@obj.StudentId"
-                           class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit </a>
-                            <a asp-controller="StudM" asp-action="DeleteStud" asp-route-id="@obj.StudentId"
-                           class="btn btn-danger mx-2"> <i class="bi bi-pencil-square"></i> Delete </a>
-                        </div>
-                    </td>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>RollNo</th>
+                    <th>Address</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>ZipCode</th>
+                    <th>Toatal</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-@*</div>*@
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td width="10%">@obj.Name</td>
+                        <td width="5%">@obj.Email</td>
+                        <td width="10%">@obj.ContactNo</td>
+                        <td width="12%">@obj.RollNo</td>
+                        <td width="7%">@obj.Address</td>
+                        <td width="5%">@obj.State</td>
+                        <td width="5%">@obj.City</td>
+                        <td width="7%">@obj.Zipcode</td>
+                        <td width="7%">@obj.CourseTotalPrice</td>
+                        <td width="30%">
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="StudM" asp-action="AddCourse" asp-route-id="@obj.StudentId"
+                               class="btn btn-primary mx-2"><i class="bi bi-person-plus-fill"></i></a>
+                                <a asp-controller="StudM" asp-action="Views" asp-route-StudentId="@obj.StudentId"
+                               class="btn btn-info mx-2"> <i class="bi bi-eye"></i> </a>
+                                <a asp-controller="StudM" asp-action="AddStud" asp-route-id="@obj.StudentId"
+                               class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i>  </a>
+                                <a asp-controller="StudM" asp-action="DeleteStud" asp-route-id="@obj.StudentId"
+                               class="btn btn-danger mx-2"> <i class="bi bi-trash3"></i>  </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

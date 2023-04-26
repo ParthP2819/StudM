@@ -19,7 +19,7 @@ namespace Stud.Model.Models
         public string? City { get; set; }
         public string? ZipCode { get; set; }
         public string? ContactNo { get; set; }
-        public double? CourseTotalPrice { get; set; }
+        //public double? CourseTotalPrice { get; set; }
         
     }
 }

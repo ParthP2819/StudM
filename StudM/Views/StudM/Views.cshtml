@@ -1,4 +1,7 @@
-﻿@model List<Stud.Model.Models.course>
+﻿@*@model List<Stud.Model.Models.course>
+*@
+
+@model List<List<Stud.Model.Models.course>>
 
 @{
     ViewData["Title"] = "Index";
@@ -9,40 +12,56 @@
         <h2 class="text-info">Course List </h2>
     </div>
     <div class=" col-6 text-end">
-        @*<div>
-            <a asp-controller="StudM" asp-action="AddStud" class="btn btn-info">
-                <i class="bi bi-person-plus-fill"></i> &nbsp; Add Student
+        <div class="col-6 text-end">
+            <a asp-controller="StudM" asp-action="Index" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> &nbsp;  Back
             </a>
-        </div>*@
+        </div>
     </div>
 </div>
 <br />
-@*<div class="container p-3">*@
-<table class="table table-bordered table-striped" style="width:100%; background-color:lightgray;">
-    <thead>
-        <tr>
-
-           <th>CourseName</th>
-           <th>CoursePrice</th>
-           <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var obj in Model)
-        {
+<div class="container p-3">
+    <table class="table table-bordered table-striped" style="width:100%; background-color:lightgray;">
+        <thead>
             <tr>
-                <td>@obj.CourseName</td>
-                <td>@obj.CoursePrice</td>
-                <td>
-                    <div class="w-75 btn-group" role="group">
-                        <a asp-controller="StudM" asp-action="AddStud" asp-route-id="@obj.StudentId"
-                       class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit </a>
-                        <a asp-controller="StudM" asp-action="DeleteStud" asp-route-id="@obj.StudentId"
-                       class="btn btn-danger mx-2"> <i class="bi bi-pencil-square"></i> Delete </a>
-                    </div>
-                </td>
+
+                <th>CourseName</th>
+                <th>CoursePrice</th>
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
-@*</div>*@
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                @foreach (var abc in obj)
+                {
+                    <tr>
+                        <td>@abc.CourseName</td>
+                        <td>@abc.CoursePrice</td>
+                        <td>
+                            <div class="w-75 btn-group" role="group">
+                                <a asp-controller="StudM" asp-action="EditCourse" asp-route-id="@abc.CourseId"
+                           class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit </a>
+                                <a asp-controller="StudM" asp-action="DeleteCourse" asp-route-Id="@abc.CourseId"
+                           class="btn btn-danger mx-2"> <i class="bi bi-pencil-square"></i> Delete </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+
+                @*<tr>
+            <td>@obj.CourseName</td>
+            <td>@obj.CoursePrice</td>
+            <td>
+            <div class="w-75 btn-group" role="group">
+            <a asp-controller="StudM" asp-action="AddStud" asp-route-id="@obj.CourseId"
+            class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit </a>
+            <a asp-controller="StudM" asp-action="DeleteStud" asp-route-id="@obj.CourseId"
+            class="btn btn-danger mx-2"> <i class="bi bi-pencil-square"></i> Delete </a>
+            </div>
+            </td>
+            </tr>*@
+            }
+        </tbody>
+    </table>
+</div>

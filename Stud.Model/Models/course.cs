@@ -16,6 +16,7 @@ namespace Stud.Model.Models
         public int CourseId { get; set; }
         public string CourseName { get; set; }
         public double CoursePrice { get; set; }
+        public int Sid { get; set; }
        
     }
 }
