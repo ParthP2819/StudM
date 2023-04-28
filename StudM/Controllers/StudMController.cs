@@ -20,11 +20,13 @@ namespace StudM.Controllers
             _db = db;
             _emailSender = emailSender;
         }
-        
-        // Listing And Join
 
-        public IActionResult Index()
+        // Listing And Join And Searching
+        [HttpGet]
+        [HttpPost]
+        public IActionResult Index(string? search)
         {
+            ViewData["CurS"] = search;
             var q = (from s in _db.student
                      join sc in _db.course on s.StudentId equals sc.Sid into scs
                      from scsresult in scs.DefaultIfEmpty()
@@ -44,6 +46,10 @@ namespace StudM.Controllers
                          Zipcode = grp.Key.ZipCode.ToString(),
                          CourseTotalPrice = grp.Sum(x => x.courseresult.CoursePrice).ToString(),
                      });
+            if (!String.IsNullOrEmpty(search))
+            {
+                q = q.Where(x=>x.Name.ToLower().Contains(search.ToLower()));
+            }
 
             return View(q);
         }
@@ -73,7 +79,7 @@ namespace StudM.Controllers
         }
 
         //=============================================================
-        // Student Side CRUD
+        // Student Side CRUD 
 
         [HttpGet]
         public IActionResult AddStud(int? id)
@@ -105,6 +111,8 @@ namespace StudM.Controllers
             }
             _db.SaveChanges();
 
+
+            // when student add then sent mail particular student 
             var message = new Message(new string[] { stud.Email }, "Add Student", "Congratulations , You are added successfully");
            _emailSender.SendEmail(message);
 
@@ -202,8 +210,7 @@ namespace StudM.Controllers
             }
             else
             {
-
-            return View();
+                return View();
             }
         }
        
@@ -225,7 +232,6 @@ namespace StudM.Controllers
         [HttpPost]
         public IActionResult EditCourse(course course)
         {
-
             course pc = _db.course.Where(x=> x.CourseId == course.CourseId).FirstOrDefault();
             pc.CourseName = course.CourseName;
             pc.CourseId = course.CourseId;
